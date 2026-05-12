@@ -1,0 +1,30 @@
+{
+  "name": "arc-agent-pay",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "USDC payment-intent toolkit for AI-agent commerce on Arc.",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "demo": "tsx examples/demo.ts"
+  },
+  "keywords": [
+    "arc",
+    "usdc",
+    "agentic-payments",
+    "circle",
+    "x402",
+    "nanopayments"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "viem": "^2.41.2"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.8.0",
+    "vitest": "^3.2.0"
+  }
+}
