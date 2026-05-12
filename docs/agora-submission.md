@@ -1,10 +1,11 @@
 # Agora Agents Hackathon Submission Notes
 
-Status: prepared, not submitted.
+Status: prepared, Luma registration completed, not finally submitted.
 
 Official page checked: https://agora.thecanteenapp.com/
 
 Official Arc X verification: @arc retweeted Canteen's Agora Agents Hackathon announcement on 2026-05-12.
+Luma registration: completed on 2026-05-12; the official Luma page returned "你已经报名参加此活动了。"
 
 ## Project
 
