@@ -1,0 +1,72 @@
+Project Title
+Arc Signal Receipts
+
+Short Description
+Arc Signal Receipts is an AI market-intelligence agent that packages each prediction-market signal as a signed reasoning receipt and gates access with small USDC payment intents on Arc Testnet.
+
+Track Submitted For
+Best Agentic Economy Experience on Arc
+
+Circle Account Email
+arbitrumaridrop@gmail.com
+
+Circle Products Used On Arc
+- USDC as the settlement asset.
+- Arc Testnet as the first settlement environment.
+- Circle Wallets as the intended wallet-management path for agent and buyer accounts.
+- Circle Gateway as the intended routing and treasury layer for operational USDC movement.
+- Nanopayments as the intended pattern for high-frequency, low-value signal access.
+
+Working MVP
+The MVP is a working TypeScript prototype in the public GitHub repository. It includes:
+- Signed payment-intent creation for USDC-denominated access.
+- Merchant-side verification of payer, merchant, service ID, amount, chain ID, expiry, and signature.
+- Nonce replay protection.
+- Signed reasoning receipts for AI-generated market signals.
+- Settlement batch status tracking for fulfilled signal access.
+- A dashboard snapshot model for signal hash, payment state, revenue, and settlement status.
+
+Run locally:
+npm install
+npm run build
+npm test
+npm run demo:agora
+
+Architecture Diagram
+The architecture is documented in docs/architecture.md. High-level flow:
+1. AI signal agent creates a structured prediction-market signal.
+2. Signal is hashed into a deterministic reasoning receipt.
+3. Agent signs the receipt.
+4. Buyer signs a small USDC payment intent on Arc Testnet.
+5. Merchant verifies the payment intent and rejects replayed nonces.
+6. Merchant unlocks the signal payload.
+7. Fulfilled access is batched for Arc Testnet settlement.
+8. Dashboard shows revenue, signal receipt, and settlement state.
+
+Demo Video
+The demo video link points to a short WebM walkthrough stored in this public repository. It shows the product flow, local commands, and expected demo output.
+
+Documentation
+- README.md
+- docs/demo-walkthrough.md
+- docs/architecture.md
+- docs/agora-submission.md
+
+GitHub Repository
+https://github.com/rick-best/arc-agent-pay
+
+Circle Product Feedback
+Why these products:
+USDC, Arc, Wallets, Gateway, and Nanopayments match the core need: predictable stablecoin pricing, fast settlement, secure account control, operational routing, and very small usage-based payments.
+
+What worked well:
+USDC-denominated intents are easy for agents, merchants, and users to reason about. Arc's stablecoin-native positioning makes the product easier to explain than volatile-token payment flows. The Circle product stack maps cleanly to agentic commerce: Wallets for account control, Gateway for liquidity and treasury movement, and Nanopayments for pay-per-signal access.
+
+What could be improved:
+Builders would benefit from a single testnet quickstart that combines Arc RPC, USDC test tokens, Wallets, Gateway, and Nanopayments into one end-to-end payment-intent example. It would also help to have public sample apps for agent-to-merchant payments and signed usage receipts.
+
+Recommendations:
+Publish a reference flow for AI-agent commerce on Arc that includes a canonical payment-intent schema, replay protection guidance, receipt hashing, dashboard reconciliation, and testnet settlement examples.
+
+Safety Note
+This is a testnet-only developer demo. It does not custody user funds, execute trades, or provide investment advice.
