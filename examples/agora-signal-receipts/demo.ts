@@ -1,11 +1,16 @@
-import { createHash } from "node:crypto";
 import { privateKeyToAccount } from "viem/accounts";
 import {
   ARC_TESTNET_CHAIN_ID,
   canonicalIntent,
+  createDashboardSnapshot,
   createPaymentIntent,
+  createReasoningReceipt,
   createSettlementBatch,
+  demoSettlementTxHash,
   recordFulfilledRequest,
+  signReasoningReceipt,
+  submitSettlementBatch,
+  verifyReasoningReceipt,
   verifyMerchantRequest
 } from "../../src/index.js";
 
@@ -21,19 +26,10 @@ interface MarketSignal {
   createdAt: string;
 }
 
-interface SignalReceipt {
-  version: "arc-signal-receipt-v1";
-  signalId: string;
-  signalHash: `0x${string}`;
-  signer: `0x${string}`;
-  chainId: number;
-  settlementAsset: "USDC";
-  createdAt: string;
-}
-
 const signalAgent = privateKeyToAccount("0x0000000000000000000000000000000000000000000000000000000000000001");
 const buyer = privateKeyToAccount("0x0000000000000000000000000000000000000000000000000000000000000002");
 const merchant = "0x7eEB8A9e794a30629B376203b97D11D9b7230De6";
+const nonceStore = new Set<string>();
 
 const signal: MarketSignal = {
   id: "agora-signal-001",
@@ -48,18 +44,19 @@ const signal: MarketSignal = {
   createdAt: new Date().toISOString()
 };
 
-const signalHash = hashJson(signal);
-const receipt: SignalReceipt = {
-  version: "arc-signal-receipt-v1",
-  signalId: signal.id,
-  signalHash,
+const receipt = createReasoningReceipt({
+  artifactId: signal.id,
+  artifact: signal,
   signer: signalAgent.address,
   chainId: ARC_TESTNET_CHAIN_ID,
-  settlementAsset: "USDC",
-  createdAt: new Date().toISOString()
-};
-
-const receiptSignature = await signalAgent.signMessage({ message: canonicalJson(receipt) });
+  expiresAt: signal.expiresAt,
+  metadata: {
+    product: "Arc Signal Receipts",
+    receiptType: "market-signal"
+  }
+});
+const signedReceipt = await signReasoningReceipt(signalAgent, receipt);
+const receiptVerification = await verifyReasoningReceipt(signedReceipt);
 
 const paymentIntent = createPaymentIntent({
   chainId: ARC_TESTNET_CHAIN_ID,
@@ -71,7 +68,7 @@ const paymentIntent = createPaymentIntent({
   expiresAt: new Date(Date.now() + 10 * 60 * 1000).toISOString(),
   metadata: {
     signalId: signal.id,
-    signalHash,
+    signalHash: receipt.artifactHash,
     product: "Arc Signal Receipts"
   }
 });
@@ -83,7 +80,8 @@ const paymentVerification = await verifyMerchantRequest(
     merchant,
     chainId: ARC_TESTNET_CHAIN_ID,
     maxAmountMicrousd: 100000n,
-    acceptedServices: new Set(["agora-signal-receipts"])
+    acceptedServices: new Set(["agora-signal-receipts"]),
+    nonceStore
   }
 );
 
@@ -93,6 +91,14 @@ if (!paymentVerification.ok) {
 
 const fulfilled = recordFulfilledRequest(paymentIntent, "req_agora_signal_001");
 const batch = createSettlementBatch(merchant, [fulfilled]);
+const fulfilledWithBatch = { ...fulfilled, settlementBatchId: batch.id };
+const submittedBatch = submitSettlementBatch(batch, demoSettlementTxHash(batch));
+const dashboard = createDashboardSnapshot({
+  merchant,
+  chainId: ARC_TESTNET_CHAIN_ID,
+  fulfilledRequests: [fulfilledWithBatch],
+  batches: [submittedBatch]
+});
 
 console.log(
   JSON.stringify(
@@ -100,36 +106,14 @@ console.log(
       product: "Arc Signal Receipts",
       chainId: ARC_TESTNET_CHAIN_ID,
       paymentVerification,
-      signalReceipt: receipt,
-      receiptSignature,
+      receiptVerification,
+      signalReceipt: signedReceipt.receipt,
+      receiptSignature: signedReceipt.signature,
       unlockedSignal: signal,
-      settlementBatch: batch
+      settlementBatch: submittedBatch,
+      dashboard
     },
     null,
     2
   )
 );
-
-function hashJson(value: unknown): `0x${string}` {
-  return `0x${createHash("sha256").update(canonicalJson(value)).digest("hex")}`;
-}
-
-function canonicalJson(value: unknown): string {
-  return JSON.stringify(sortObject(value));
-}
-
-function sortObject(value: unknown): unknown {
-  if (Array.isArray(value)) {
-    return value.map(sortObject);
-  }
-
-  if (value !== null && typeof value === "object") {
-    return Object.fromEntries(
-      Object.entries(value as Record<string, unknown>)
-        .sort(([a], [b]) => a.localeCompare(b))
-        .map(([key, nested]) => [key, sortObject(nested)])
-    );
-  }
-
-  return value;
-}

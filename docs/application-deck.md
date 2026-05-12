@@ -54,8 +54,10 @@ Completed:
 - TypeScript implementation for payment-intent creation and canonical payloads.
 - Merchant-side verification helpers.
 - Replay and expiry checks.
-- Settlement-batch model.
-- Local tests and demo script.
+- Signed reasoning receipt helpers.
+- Settlement-batch model and status transitions.
+- Dashboard snapshot output.
+- Local tests and demo scripts.
 - Arc House onboarding and Arc Testnet wallet funding.
 
 Not claimed:
@@ -64,6 +66,7 @@ Not claimed:
 - No revenue.
 - No AUM.
 - No mainnet deployment.
+- No live settlement transaction executor yet.
 
 ## 7. Milestones
 

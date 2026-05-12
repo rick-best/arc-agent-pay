@@ -29,7 +29,7 @@ Planned integrations:
 
 ## Current status
 
-This is a prototype scaffold. The first implementation focuses on payment-intent creation and merchant-side verification. Settlement execution is intentionally isolated so the project can start safely on Arc Testnet.
+This is a working testnet-oriented prototype. It includes signed payment-intent creation, merchant-side verification, nonce replay protection, signed reasoning receipts, settlement batch status tracking, and a dashboard snapshot for hackathon/demo output. Live Arc Testnet transaction execution remains isolated until a dedicated settlement contract or approved testnet wallet flow is added.
 
 ## Repository layout
 
@@ -38,9 +38,13 @@ src/
   intent.ts        Payment-intent creation and validation helpers
   merchant.ts      Merchant-side request verification
   settlement.ts    Settlement batch model and status tracking
+  receipt.ts       Deterministic reasoning receipts and signature checks
+  dashboard.ts     Merchant dashboard snapshot model
   types.ts         Shared types
 examples/
   demo.ts          End-to-end local demo
+  agora-signal-receipts/
+    demo.ts        Agora market-signal receipt demo
 docs/
   architecture.md  Product and technical architecture
   grant.md         Grant submission summary
@@ -66,8 +70,9 @@ The `examples/agora-signal-receipts` demo adapts the payment-intent flow into a 
 2. The signal is hashed into a deterministic reasoning receipt.
 3. The agent signs the receipt.
 4. A buyer signs a small USDC payment intent on Arc Testnet.
-5. The merchant verifies payment authorization before releasing the signal.
-6. Fulfilled access is grouped into a settlement batch for later Arc Testnet settlement.
+5. The merchant verifies payment authorization and rejects replayed nonces.
+6. Fulfilled access is grouped into a settlement batch with submitted status.
+7. A dashboard snapshot shows revenue, settlement state, signal hash, and demo transaction reference.
 
 This demo is for testnet development and product submission only. It does not execute trades, custody funds, or provide investment advice.
 

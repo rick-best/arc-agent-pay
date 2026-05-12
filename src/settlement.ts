@@ -46,3 +46,63 @@ function batchId(merchant: HexAddress, requests: FulfilledRequest[], createdAt: 
   }
   return `batch_${hash.digest("hex").slice(0, 16)}`;
 }
+
+export function submitSettlementBatch(
+  batch: SettlementBatch,
+  txHash: `0x${string}`,
+  submittedAt = new Date().toISOString()
+): SettlementBatch {
+  if (batch.status !== "created" && batch.status !== "failed") {
+    throw new Error(`Cannot submit settlement batch from ${batch.status} status`);
+  }
+
+  return {
+    ...batch,
+    status: "submitted",
+    txHash,
+    submittedAt,
+    failedAt: undefined,
+    failureReason: undefined
+  };
+}
+
+export function confirmSettlementBatch(
+  batch: SettlementBatch,
+  confirmedAt = new Date().toISOString()
+): SettlementBatch {
+  if (batch.status !== "submitted") {
+    throw new Error(`Cannot confirm settlement batch from ${batch.status} status`);
+  }
+
+  return {
+    ...batch,
+    status: "confirmed",
+    confirmedAt
+  };
+}
+
+export function failSettlementBatch(
+  batch: SettlementBatch,
+  failureReason: string,
+  failedAt = new Date().toISOString()
+): SettlementBatch {
+  if (batch.status === "confirmed") {
+    throw new Error("Cannot fail a confirmed settlement batch");
+  }
+
+  return {
+    ...batch,
+    status: "failed",
+    failedAt,
+    failureReason
+  };
+}
+
+export function demoSettlementTxHash(batch: SettlementBatch): `0x${string}` {
+  const hash = createHash("sha256");
+  hash.update(batch.id);
+  hash.update(batch.merchant.toLowerCase());
+  hash.update(batch.totalAmountMicrousd);
+  hash.update(batch.createdAt);
+  return `0x${hash.digest("hex")}`;
+}

@@ -11,6 +11,7 @@ The current prototype does three things:
 - Creates a structured prediction-market signal with confidence, sources, risk level, and expiry.
 - Hashes the signal into a deterministic signed receipt.
 - Uses a small USDC payment intent on Arc Testnet so a buyer can unlock the signal before fulfilled access is batched for settlement.
+- Shows replay protection, submitted settlement status, and a small merchant dashboard snapshot for the demo flow.
 
 Why Arc matters:
 

@@ -44,3 +44,4 @@ const fulfilled = recordFulfilledRequest(intent, "req_demo_001");
 const batch = createSettlementBatch(merchant, [fulfilled]);
 
 console.log(JSON.stringify({ verification, batch }, null, 2));
+

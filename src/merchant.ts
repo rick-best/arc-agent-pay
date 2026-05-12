@@ -1,4 +1,4 @@
-import type { FulfilledRequest, PaymentIntent, SignedPaymentIntent, VerificationResult } from "./types.js";
+import type { FulfilledRequest, NonceStore, PaymentIntent, SignedPaymentIntent, VerificationResult } from "./types.js";
 import { verifySignedIntent } from "./intent.js";
 
 export interface MerchantPolicy {
@@ -6,6 +6,7 @@ export interface MerchantPolicy {
   chainId: number;
   maxAmountMicrousd: bigint;
   acceptedServices: Set<string>;
+  nonceStore?: NonceStore;
 }
 
 export async function verifyMerchantRequest(
@@ -28,7 +29,16 @@ export async function verifyMerchantRequest(
     return { ok: false, reason: "amount_exceeds_policy" };
   }
 
-  return verifySignedIntent(signed);
+  if (policy.nonceStore?.has(signed.intent.nonce)) {
+    return { ok: false, reason: "replayed_nonce" };
+  }
+
+  const result = await verifySignedIntent(signed);
+  if (result.ok) {
+    policy.nonceStore?.add(signed.intent.nonce);
+  }
+
+  return result;
 }
 
 export function recordFulfilledRequest(intent: PaymentIntent, requestId: string, usageUnits = 1): FulfilledRequest {

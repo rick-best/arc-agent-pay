@@ -17,6 +17,7 @@ npm install
 npm run build
 npm test
 npm run demo
+npm run demo:agora
 ```
 
 ## What The Demo Shows
@@ -48,6 +49,8 @@ npm run demo
 
 6. Fulfilled records are grouped into a settlement batch with total amount, payment asset, status, and timestamps.
 
+7. The Agora demo also creates and verifies a signed reasoning receipt for a market signal, moves the settlement batch into submitted status with a deterministic demo transaction reference, and prints a dashboard snapshot.
+
 ## Current Test Coverage
 
 The current test suite checks:
@@ -56,6 +59,8 @@ The current test suite checks:
 - Signed intent verification.
 - Replay rejection.
 - Expired intent rejection.
+- Signed reasoning receipt verification.
+- Dashboard snapshot totals for submitted settlement batches.
 
 ## Current Demo Output
 
@@ -68,15 +73,23 @@ verification: ok
 chainId: 5042002
 paymentAsset: USDC
 totalAmountMicrousd: 25000
-status: pending
+status: created
+```
+
+The Agora demo also prints:
+
+```text
+receiptVerification: ok
+settlementBatch.status: submitted
+dashboard.submittedSettlementMicrousd: 50000
 ```
 
 ## Circle / Arc Integration Roadmap
 
 The current implementation is deliberately testnet-first and avoids mainnet claims. Next steps:
 
-- Add an Arc Testnet settlement worker.
-- Add transaction examples from ArcScan.
+- Replace deterministic demo transaction references with live Arc Testnet settlement transactions.
+- Add transaction examples from the official Arc block explorer when live testnet settlement is available.
 - Add Circle Gateway funding flow notes.
 - Add Wallets or compatible wallet management examples.
 - Add CCTP funding path documentation.

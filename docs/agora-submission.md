@@ -49,9 +49,10 @@ The demo prints:
 
 - payment verification result
 - deterministic signal receipt hash
-- signed receipt
+- signed receipt and receipt verification result
 - unlocked signal payload
-- Arc Testnet settlement batch model
+- submitted Arc Testnet settlement batch model
+- dashboard snapshot with signal, payment, revenue, and settlement state
 
 ## Submission assets
 
@@ -67,11 +68,11 @@ I am building Arc Signal Receipts, an AI market-intelligence agent for Agora. Th
 
 Arc Signal Receipts makes each signal a paid, verifiable artifact. The agent creates a structured prediction-market signal with confidence, reasoning summary, sources, risk level, and expiry. The signal is hashed into a deterministic receipt and signed by the agent. A buyer unlocks the signal through a small USDC payment intent on Arc Testnet. The merchant verifies the payment before releasing the signal, and fulfilled access can be batched for settlement.
 
-Arc is central because this workflow needs predictable USDC-denominated costs, fast finality, and stablecoin-native settlement. The current demo extends my ArcAgent Pay prototype and shows signed receipts, payment verification, and a settlement batch model. The next step is adding live Arc Testnet transactions, a small dashboard, and feedback from Arc House and Agora builders.
+Arc is central because this workflow needs predictable USDC-denominated costs, fast finality, and stablecoin-native settlement. The current demo extends my ArcAgent Pay prototype and shows signed receipts, payment verification, replay protection, submitted settlement-batch status, and a dashboard snapshot. The next step is replacing the deterministic demo transaction reference with a live Arc Testnet transaction and collecting feedback from Arc House and Agora builders.
 
 ## Traction answer
 
-This is an early hackathon build. Current progress includes a working TypeScript prototype, local demo, signed payment-intent verification, deterministic receipt hashing, settlement batch modeling, Arc Testnet wallet preparation, and public GitHub materials. Next traction goal is to collect feedback from Arc House, Canteen Discord, and Arc builder Discord during the event window.
+This is an early hackathon build. Current progress includes a working TypeScript prototype, local demo, signed payment-intent verification, deterministic receipt hashing, receipt signature verification, replay protection, settlement batch status tracking, dashboard snapshot output, Arc Testnet wallet preparation, and public GitHub materials. Next traction goal is to collect feedback from Arc House, Canteen Discord, and Arc builder Discord during the event window.
 
 ## Safety note
 
