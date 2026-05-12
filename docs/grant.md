@@ -1,5 +1,7 @@
 # Circle Developer Grant Summary
 
+Status: submitted through the Circle/Questbook portal on 2026-05-12.
+
 ## Project
 
 ArcAgent Pay
