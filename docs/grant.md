@@ -10,7 +10,15 @@ xianglong Zhang, independent builder
 
 Email: arbitrumaridrop@gmail.com
 
+Role/title: Independent builder
+
+Professional specialty: AI agents, stablecoin payments, TypeScript developer tooling
+
+Team type: Independent builder / solo applicant
+
 GitHub: https://github.com/rick-best/arc-agent-pay
+
+Canonical identity source: `../../grants/submission_identity.md`
 
 ## Funding request
 
