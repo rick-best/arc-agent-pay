@@ -45,9 +45,16 @@ examples/
   demo.ts          End-to-end local demo
   agora-signal-receipts/
     demo.ts        Agora market-signal receipt demo
+  agent-api-meter/
+    demo.ts        Usage-based paid API calls for agent marketplaces
+  escrow-judge/
+    demo.ts        AI-reviewed deliverables and escrow release receipts
+  reputation-router/
+    demo.ts        Agent selection with signed reputation routing receipts
 docs/
   architecture.md  Product and technical architecture
   grant.md         Grant submission summary
+  portfolio/       Arc demo portfolio notes
 test/
   intent.test.ts   Payment-intent unit tests
 ```
@@ -60,6 +67,7 @@ npm run build
 npm test
 npm run demo
 npm run demo:agora
+npm run demo:portfolio
 ```
 
 ## Agora Agents Hackathon demo
@@ -75,6 +83,17 @@ The `examples/agora-signal-receipts` demo adapts the payment-intent flow into a 
 7. A dashboard snapshot shows revenue, settlement state, signal hash, and demo transaction reference.
 
 This demo is for testnet development and product submission only. It does not execute trades, custody funds, or provide investment advice.
+
+## Arc demo portfolio
+
+The repository now contains a small portfolio of Arc-native agentic commerce demos:
+
+- `Arc Signal Receipts`: paid market-intelligence artifacts with signed reasoning receipts.
+- `Arc Agent API Meter`: usage-based paid API calls for agent marketplaces.
+- `Arc Escrow Judge`: AI-reviewed deliverables that produce release/refund receipts for USDC escrow workflows.
+- `Arc Reputation Router`: agent selection with signed reputation routing decisions and per-route settlement.
+
+All demos share the same primitives: signed USDC payment intents, merchant policy checks, nonce replay protection, signed receipts, settlement batches, and dashboard snapshots.
 
 ## Milestones
 

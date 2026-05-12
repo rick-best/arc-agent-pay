@@ -8,7 +8,11 @@
     "build": "tsc -p tsconfig.json",
     "test": "vitest run",
     "demo": "tsx examples/demo.ts",
-    "demo:agora": "tsx examples/agora-signal-receipts/demo.ts"
+    "demo:agora": "tsx examples/agora-signal-receipts/demo.ts",
+    "demo:api-meter": "tsx examples/agent-api-meter/demo.ts",
+    "demo:escrow-judge": "tsx examples/escrow-judge/demo.ts",
+    "demo:reputation-router": "tsx examples/reputation-router/demo.ts",
+    "demo:portfolio": "npm run demo:agora && npm run demo:api-meter && npm run demo:escrow-judge && npm run demo:reputation-router"
   },
   "keywords": [
     "arc",
