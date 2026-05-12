@@ -55,7 +55,21 @@ npm install
 npm run build
 npm test
 npm run demo
+npm run demo:agora
 ```
+
+## Agora Agents Hackathon demo
+
+The `examples/agora-signal-receipts` demo adapts the payment-intent flow into a hackathon-ready agentic market-intelligence product:
+
+1. An AI signal agent produces a structured market signal.
+2. The signal is hashed into a deterministic reasoning receipt.
+3. The agent signs the receipt.
+4. A buyer signs a small USDC payment intent on Arc Testnet.
+5. The merchant verifies payment authorization before releasing the signal.
+6. Fulfilled access is grouped into a settlement batch for later Arc Testnet settlement.
+
+This demo is for testnet development and product submission only. It does not execute trades, custody funds, or provide investment advice.
 
 ## Milestones
 
