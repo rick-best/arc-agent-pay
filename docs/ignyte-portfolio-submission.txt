@@ -1,0 +1,95 @@
+Project Title
+Arc Agentic Commerce Portfolio
+
+Short Description
+Arc Agentic Commerce Portfolio is a seven-demo TypeScript portfolio that shows how one Arc/Circle payment-intent, receipt, and settlement layer can support multiple agentic commerce products: paid signals, metered APIs, escrow review, reputation routing, policy checks, subscriptions, and liquidity route planning.
+
+Track Submitted For
+Best Agentic Economy Experience on Arc
+
+Circle Account Email
+arbitrumaridrop@gmail.com
+
+Circle Products Used On Arc
+- USDC as the settlement asset for all portfolio demos.
+- Arc Testnet as the target settlement environment.
+- Circle Wallets as the intended account-control layer for buyers, merchants, and autonomous agents.
+- Circle Gateway as the intended operational routing and treasury layer for USDC movement.
+- CCTP metadata in the liquidity-router demo for cross-chain funding plans.
+- Nanopayments as the usage pattern for high-frequency paid access, API metering, and policy checks.
+
+Working MVP
+The public repository contains seven runnable demos sharing the same payment and receipt primitives:
+- Arc Signal Receipts: paid market-intelligence signals with signed reasoning receipts.
+- Arc Agent API Meter: usage-based USDC billing for agent/API calls.
+- Arc Escrow Judge: AI-reviewed deliverables with release/refund metadata.
+- Arc Reputation Router: seller routing using price, latency, reliability, and signed route decisions.
+- Arc Policy Guard: paid spend-policy allow/deny checks for autonomous agents.
+- Arc Subscription Agent: recurring USDC renewals and entitlement receipts.
+- Arc Liquidity Router: Gateway/CCTP-aware funding plans before Arc settlement.
+
+Run locally:
+npm install
+npm run build
+npm test
+npm run demo:portfolio
+
+Individual Demo Commands
+npm run demo:agora
+npm run demo:api-meter
+npm run demo:escrow-judge
+npm run demo:reputation-router
+npm run demo:policy-guard
+npm run demo:subscription-agent
+npm run demo:liquidity-router
+
+Architecture
+All seven demos reuse the same structure:
+1. An agent creates a paid service artifact or decision.
+2. The artifact is normalized and hashed into a deterministic receipt.
+3. The agent or reviewer signs the receipt.
+4. A buyer or service account creates a USDC payment intent for the specific service.
+5. Merchant verification checks payer, merchant, service ID, amount, chain ID, expiry, signature, and replay-protected nonce.
+6. The service unlocks the paid result and records settlement metadata.
+7. A dashboard snapshot exposes revenue, receipt hashes, and settlement state.
+
+Documentation
+- README.md
+- docs/portfolio/arc-demo-portfolio.md
+- docs/demo-walkthrough.md
+- docs/architecture.md
+- docs/agora-submission.md
+- docs/ignyte-submission.txt
+
+GitHub Repository
+https://github.com/rick-best/arc-agent-pay
+
+Demo Video
+The product demo video is hosted in the public repository:
+https://raw.githubusercontent.com/rick-best/arc-agent-pay/main/assets/arc-signal-receipts-demo.webm
+
+Why This Matters For Arc
+Agentic commerce needs more than a single payment demo. The portfolio shows how Arc can become the settlement layer for repeated autonomous-agent workflows:
+- Buy paid intelligence.
+- Meter paid API/tool calls.
+- Release escrow after AI review.
+- Route orders to trusted agent sellers.
+- Enforce spend policy before autonomous payment.
+- Renew subscriptions without card rails.
+- Plan USDC funding routes into Arc settlement.
+
+Circle Product Feedback
+What worked well:
+USDC payment intents and signed receipts are simple to explain across many agent workflows. Arc's stablecoin-native positioning makes it natural to price each action in dollars, while Wallets, Gateway, CCTP, and Nanopayments map cleanly to account control, movement, funding, and small paid interactions.
+
+What could be improved:
+Builders would benefit from a canonical Arc agent-commerce starter kit with:
+- A standard payment-intent schema.
+- Nonce and replay-protection guidance.
+- Signed receipt examples.
+- Wallets and Gateway testnet wiring.
+- Nanopayment examples for metered API calls.
+- CCTP/Gateway examples for route planning.
+
+Safety Note
+This is a testnet-only developer portfolio. It does not custody user funds, execute trades, or provide investment advice.
