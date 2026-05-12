@@ -6,6 +6,8 @@ Official page checked: https://agora.thecanteenapp.com/
 
 Official Arc X verification: @arc retweeted Canteen's Agora Agents Hackathon announcement on 2026-05-12.
 Luma registration: completed on 2026-05-12; the official Luma page returned "你已经报名参加此活动了。"
+Canteen Discord: joined; `rickbest` posted the Arc Signal Receipts intro and GitHub link in `#agora-hackers` on 2026-05-12.
+Arc builder Discord: application submitted through the official Arc House `Arc Discord` link; Discord shows the Build on Arc membership application is pending approval.
 
 ## Project
 
