@@ -51,6 +51,12 @@ examples/
     demo.ts        AI-reviewed deliverables and escrow release receipts
   reputation-router/
     demo.ts        Agent selection with signed reputation routing receipts
+  policy-guard/
+    demo.ts        Paid agent spend-policy decisions
+  subscription-agent/
+    demo.ts        Autonomous agent-service renewals
+  liquidity-router/
+    demo.ts        USDC funding route plans toward Arc settlement
 docs/
   architecture.md  Product and technical architecture
   grant.md         Grant submission summary
@@ -92,6 +98,9 @@ The repository now contains a small portfolio of Arc-native agentic commerce dem
 - `Arc Agent API Meter`: usage-based paid API calls for agent marketplaces.
 - `Arc Escrow Judge`: AI-reviewed deliverables that produce release/refund receipts for USDC escrow workflows.
 - `Arc Reputation Router`: agent selection with signed reputation routing decisions and per-route settlement.
+- `Arc Policy Guard`: paid allow/deny checks for autonomous agent spend policies.
+- `Arc Subscription Agent`: recurring USDC renewals for agent services with entitlement receipts.
+- `Arc Liquidity Router`: signed funding route plans for moving USDC liquidity toward Arc settlement.
 
 All demos share the same primitives: signed USDC payment intents, merchant policy checks, nonce replay protection, signed receipts, settlement batches, and dashboard snapshots.
 

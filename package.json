@@ -12,7 +12,10 @@
     "demo:api-meter": "tsx examples/agent-api-meter/demo.ts",
     "demo:escrow-judge": "tsx examples/escrow-judge/demo.ts",
     "demo:reputation-router": "tsx examples/reputation-router/demo.ts",
-    "demo:portfolio": "npm run demo:agora && npm run demo:api-meter && npm run demo:escrow-judge && npm run demo:reputation-router"
+    "demo:policy-guard": "tsx examples/policy-guard/demo.ts",
+    "demo:subscription-agent": "tsx examples/subscription-agent/demo.ts",
+    "demo:liquidity-router": "tsx examples/liquidity-router/demo.ts",
+    "demo:portfolio": "npm run demo:agora && npm run demo:api-meter && npm run demo:escrow-judge && npm run demo:reputation-router && npm run demo:policy-guard && npm run demo:subscription-agent && npm run demo:liquidity-router"
   },
   "keywords": [
     "arc",
